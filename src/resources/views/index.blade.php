@@ -28,7 +28,7 @@
                 value="{{ old('content') }}" />
             <select class="create-form__item-select" name="category_id">
                 @foreach ($categories as $category)
-                    <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
                 @endforeach
             </select>
         </div>
@@ -39,11 +39,14 @@
     <div class="section__title">
         <h2>Todo検索</h2>
     </div>
-    <form class="search-form">
+    <form class="search-form" action="/todos/search" method="get">
         <div class="search-form__item">
-            <input class="search-form__item-input" type="text" />
-            <select class="search-form__item-select">
+            <input class="search-form__item-input" type="text" name="keyword" value="{{ request('keyword') }}">
+            <select class="search-form__item-select" name="category_id">
                 <option value="">カテゴリ</option>
+                @foreach ($categories as $category)
+                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                @endforeach
             </select>
         </div>
         <div class="search-form__button">
@@ -53,7 +56,6 @@
     <div class="todo-table">
         <table class="todo-table__inner">
             <tr class="todo-table__row">
-                - <th class="todo-table__header">Todo</th>
                 <th class="todo-table__header">
                     <span class="todo-table__header-span">Todo</span>
                     <span class="todo-table__header-span">カテゴリ</span>
@@ -73,7 +75,15 @@
                             <input type="hidden" name="id" value="{{ $todo['id'] }}" />
                         </div>
                         <div class="update-form__item">
-                            <p class="update-form__item-p">Category 1</p>
+                            <select class="search-form__item-select" name="category_id">
+                                @foreach ($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    @if ($todo->category_id == $category->id) selected @endif>
+                                    {{ $category->name }}
+                                </option>
+                                @endforeach
+                            </select>
+
                         </div>
                         <div class="update-form__button">
                             <button class="update-form__button-submit" type="submit">
@@ -84,8 +94,10 @@
                 </td>
                 <td class="todo-table__item">
                     <form class="delete-form" action="/todos/delete" method="post">
-                        @method('DELETE') @csrf
+                        @method('DELETE')
+                        @csrf
                         <div class="delete-form__button">
+                            <input type="hidden" name="id" value="{{ $todo['id'] }}" />
                             <button class="delete-form__button-submit" type="submit">
                                 削除
                             </button>

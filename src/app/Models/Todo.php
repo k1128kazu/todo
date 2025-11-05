@@ -12,6 +12,20 @@ class Todo extends Model
 
     public function category()
     {
-        return $this->belongTo(Category::class);
+        return $this->belongsTo(Category::class);
+    }
+    public function scopeCategorySearch($query, $categoryId)
+    {
+        if (!empty($categoryId)) {
+            $query->where('category_id', $categoryId);
+        }
+    }
+    public function scopeKeywordSearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where('content', 'like', '%' . $keyword . '%');
+        }
+        return $query;
     }
 }
+

@@ -27,7 +27,7 @@ class CategoryRequest extends FormRequest
             'name' => ['required', 'string', 'max:10', 'unique:categories'],
         ];
     }
-    public function message()
+    public function messages()
     {
         return[
             'name.required' => 'カテゴリー名を入力してください',
