@@ -168,3 +168,217 @@
                           color: #fff;
                           cursor: pointer;
                       }
+/* ▼ 全体レイアウトの余白 */
+.todo__content {
+    width: 80%;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+/* ▼ セクションタイトル */
+.section__title h2 {
+    font-size: 1.4rem;
+    margin: 20px 0 10px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+/* ▼ フォーム全般 */
+.create-form__item,
+.search-form__item,
+.sort-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* ▼ 入力欄 */
+.create-form__item-input,
+.search-form__item-input,
+.search-form__item-select,
+.create-form__item-select {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* ▼ 日付入力欄 */
+.create-form__item-input[type="date"] {
+    max-width: 180px;
+}
+
+/* ▼ ボタン共通 */
+.create-form__button-submit,
+.search-form__button-submit {
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.create-form__button-submit:hover,
+.search-form__button-submit:hover {
+    background-color: #555;
+}
+
+/* ▼ Todoテーブル */
+.todo-table__inner {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.todo-table__header {
+    background-color: #f5f5f5;
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+}
+
+.todo-table__item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.todo-table__row:hover {
+    background-color: #fafafa;
+}
+
+/* ▼ レスポンシブ対応 */
+@media (max-width: 768px) {
+    .todo__content {
+        width: 95%;
+    }
+
+    .create-form__item,
+    .search-form__item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .create-form__button,
+    .search-form__button {
+        width: 100%;
+    }
+}
+/* ▼ テーブル全体の横並び修正 */
+.todo-table__inner {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* ✅ 各列の幅を均等にする */
+}
+
+/* ▼ 見出しセルと内容セルの整列 */
+.todo-table__inner th,
+.todo-table__inner td {
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+    /* ✅ 折り返し防止 */
+}
+
+/* ▼ ヘッダー背景 */
+.todo-table__inner th {
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #ccc;
+}
+
+/* ▼ ボタンを横並びに */
+.todo-table__item form {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/* ▼ 更新・削除ボタンの調整 */
+.update-form__button-submit,
+.delete-form__button-submit {
+    font-size: 12px;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.update-form__button-submit {
+    background-color: #007bff;
+    color: white;
+}
+
+.delete-form__button-submit {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.update-form__button-submit:hover {
+    background-color: #0056b3;
+}
+
+.delete-form__button-submit:hover {
+    background-color: #c0392b;
+}
+.update-form__item-input,
+.update-form__item-select {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.update-form__button-submit,
+.delete-form__button-submit {
+    font-size: 13px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.update-form__button-submit {
+    background-color: #007bff;
+    color: white;
+}
+
+.update-form__button-submit:hover {
+    background-color: #0056b3;
+}
+
+.delete-form__button-submit {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-form__button-submit:hover {
+    background-color: #c0392b;
+}
+form.sort-form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0 12px;
+}
+
+form.sort-form label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+form.sort-form select {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}

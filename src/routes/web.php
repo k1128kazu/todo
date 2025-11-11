@@ -16,15 +16,13 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('/',[TodoController::class, 'index']);
 Route::post('/todos',[TodoController::class, 'store']);
 Route::patch('/todos/update', [TodoController::class, 'update']);
 Route::delete('/todos/delete', [TodoController::class, 'destroy']);
 Route::get('/categories',[CategoryController::class, 'index']);
-Route::POST('/categories',[CategoryController::class, 'store']);
+Route::post('/categories',[CategoryController::class, 'store']);
 Route::patch('/categories/update',[CategoryController::class, 'update']);
 Route::get('/todos/search',[TodoController::class, 'search']);
 Route::delete('/categories/delete',[CategoryController::class, 'destroy']);
