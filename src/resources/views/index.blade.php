@@ -64,18 +64,38 @@
         <h2>Todo検索</h2>
     </div>
 
-    <form class="search-form" action="/todos/search" method="get">
-        <div class="search-form__item">
-            <input class="search-form__item-input" type="text" name="keyword" value="{{ request('keyword') }}">
-            <select class="search-form__item-select" name="category_id">
-                <option value="">カテゴリ</option>
-                @foreach ($categories as $category)
-                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="search-form__button">
-            <button class="search-form__button-submit" type="submit">検索</button>
+    <form action="/" method="get" class="search-form">
+        <div class="search-grid">
+            <!-- 左列：キーワード / カテゴリ（縦） -->
+            <div class="col">
+                <label for="kw">キーワード：</label>
+                <input id="kw" type="text" name="keyword" placeholder="キーワード"
+                    value="{{ old('keyword', $keyword ?? '') }}">
+
+                <label for="cat">カテゴリ：</label>
+                <select id="cat" name="category_id">
+                    <option value="">全てのカテゴリ</option>
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ ($category_id ?? '') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- 中列：開始日 / 終了日（縦） -->
+            <div class="col">
+                <label for="sd">開始日：</label>
+                <input id="sd" type="date" name="start_date" value="{{ old('start_date', $start_date ?? '') }}">
+
+                <label for="ed">終了日：</label>
+                <input id="ed" type="date" name="end_date" value="{{ old('end_date', $end_date ?? '') }}">
+            </div>
+
+            <!-- 右列：検索ボタン -->
+            <div class="col button-col">
+                <button type="submit" class="search-btn">検索</button>
+            </div>
         </div>
     </form>
     <!-- ▼ Todo一覧タイトル -->

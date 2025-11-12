@@ -13,20 +13,48 @@ class TodoController extends Controller
      */
     public function index(Request $request)
     {
-        // 並び順の指定（デフォルト：登録順）
-        $sort = $request->get('sort', 'created_at');
-
-        // 並び替え条件に応じて取得
-        if ($sort === 'deadline') {
-            $todos = Todo::with('category')->orderBy('deadline', 'asc')->get();
-        } else {
-            $todos = Todo::with('category')->orderBy('created_at', 'desc')->get();
-        }
-
-        // カテゴリ一覧を取得
         $categories = Category::all();
 
-        return view('index', compact('todos', 'categories', 'sort'));
+        $category_id = $request->category_id;
+        $keyword     = $request->keyword;
+        $start_date  = $request->start_date;
+        $end_date    = $request->end_date;
+        $sort        = $request->input('sort', 'created_at'); // 並び替え用
+
+        $query = Todo::with('category');
+
+        if (!empty($category_id)) {
+            $query->where('category_id', $category_id);
+        }
+
+        if (!empty($keyword)) {
+            $query->where('content', 'like', "%{$keyword}%");
+        }
+
+        // ✅ 修正ポイント： 'due_date' → 'deadline'
+        if (!empty($start_date) && !empty($end_date)) {
+            $query->whereBetween('deadline', [$start_date, $end_date]);
+        } elseif (!empty($start_date)) {
+            $query->where('deadline', '>=', $start_date);
+        } elseif (!empty($end_date)) {
+            $query->where('deadline', '<=', $end_date);
+        }
+
+        // 並び順（登録順 or 期日順）
+        $orderColumn = $sort === 'deadline' ? 'deadline' : 'created_at';
+        $query->orderBy($orderColumn, 'asc');
+
+        $todos = $query->get();
+
+        return view('index', compact(
+            'todos',
+            'categories',
+            'category_id',
+            'keyword',
+            'start_date',
+            'end_date',
+            'sort'
+        ));
     }
 
     /**

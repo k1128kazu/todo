@@ -27,3 +27,60 @@
     text-decoration: none;
     
 }
+/* === Todo検索フォーム：左右2列＋右にボタン（CSS Grid） === */
+.search-grid {
+    display: grid !important;
+    /* 既存スタイルに勝つために !important */
+    grid-template-columns: minmax(280px, 1fr) minmax(220px, 1fr) auto;
+    column-gap: 24px;
+    row-gap: 12px;
+    align-items: end;
+    /* 各列の下端を揃える */
+}
+
+.search-grid .col {
+    display: grid;
+    grid-auto-rows: min-content;
+    row-gap: 10px;
+    /* 縦間隔 */
+}
+
+.search-grid label {
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.search-grid input[type="text"],
+.search-grid select,
+.search-grid input[type="date"] {
+    height: 36px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button-col {
+    align-self: end;
+}
+
+.search-btn {
+    display: inline-block;
+    height: 36px;
+    /* 高さを固定 */
+    padding: 0 16px;
+    /* 横方向の余白 */
+    line-height: 36px;
+    /* 文字を縦方向中央に */
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+    /* 文字の折り返しを防ぐ */
+}
+.search-btn:hover {
+    background: #555;
+}
