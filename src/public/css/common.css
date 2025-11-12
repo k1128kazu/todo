@@ -84,3 +84,54 @@
 .search-btn:hover {
     background: #555;
 }
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination .page-link {
+    color: #333;
+    border-radius: 4px;
+}
+
+.pagination .active .page-link {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+/* === pargination 追加分 === */
+.pagination {
+    display: flex;
+    justify-content: center;
+    /* 中央揃え */
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination li {
+    display: inline-block;
+    /* 横並び */
+    margin: 0 5px;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 6px 12px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.pagination .active span {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+}

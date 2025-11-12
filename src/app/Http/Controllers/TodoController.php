@@ -44,7 +44,8 @@ class TodoController extends Controller
         $orderColumn = $sort === 'deadline' ? 'deadline' : 'created_at';
         $query->orderBy($orderColumn, 'asc');
 
-        $todos = $query->get();
+        /** @var \Illuminate\Contracts\Pagination\LengthAwarePaginator $todos */
+        $todos = $query->paginate(10)->withQueryString();
 
         return view('index', compact(
             'todos',

@@ -181,6 +181,10 @@
             </tbody>
         </table>
     </div>
+    <div class="pagination">
+        {{ $todos->links('pagination::bootstrap-5') }}
+    </div>
+
 
 </div>
 @endsection
