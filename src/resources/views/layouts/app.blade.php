@@ -18,6 +18,21 @@
                 <a class="header__logo" href="/">
                     Todo
                 </a>
+                @auth
+                <form method="POST" action="/logout" style="display:inline-block; margin-left:20px;">
+                    @csrf
+                    <button type="submit" class="logout-button" style="
+                    padding:8px 15px;
+                    background:#ff5555;
+                    color:#fff;
+                    border:none;
+                    border-radius:4px;
+                    cursor:pointer;
+                ">
+                        ログアウト
+                    </button>
+                </form>
+                @endauth
                 <nav>
                     <ul class="header-nav">
                         <li class="header-nav__item">
